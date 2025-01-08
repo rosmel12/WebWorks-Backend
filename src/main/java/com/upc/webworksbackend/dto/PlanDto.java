@@ -1,5 +1,6 @@
 package com.upc.webworksbackend.dto;
 
+import jakarta.persistence.Column;
 import lombok.*;
 
 @Data
@@ -18,8 +19,10 @@ public class PlanDto {
     private String description8;
     private String description9;
     private String description10;
-    private Float precio;
-    private String imagen;
+    private int maxNumberRepository;
+    private int maxNumberProject;
+    private Float price;
+    private String image;
     private Integer id_money;
 
     public Integer getId() {
@@ -118,20 +121,20 @@ public class PlanDto {
         this.description10 = description10;
     }
 
-    public Float getPrecio() {
-        return precio;
+    public Float getPrice() {
+        return price;
     }
 
-    public void setPrecio(Float precio) {
-        this.precio = precio;
+    public void setPrice(Float price) {
+        this.price = price;
     }
 
-    public String getImagen() {
-        return imagen;
+    public String getImage() {
+        return image;
     }
 
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Integer getId_money() {

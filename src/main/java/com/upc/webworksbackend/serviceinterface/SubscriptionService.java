@@ -33,7 +33,7 @@ final PromotionCodeRepository promotionCodeRepository;
         UserModel userModel = userRepository.findById(subscriptionDbo.getId_plan()).orElse(null);
         MethodPaymentModel methodPaymentModel=methodPaymentRepository.findById(subscriptionDbo.getId_methodPayment()).orElse(null);
         PromotionCodeModel promotionCodeModel=promotionCodeRepository.findById(subscriptionDbo.getId_promotionCode()).orElse(null);
-        if (planModel!=null && userModel !=null && methodPaymentModel!=null) {
+        if (planModel!=null && userModel !=null) {
             ModelMapper modelMapper = new ModelMapper();
             SubscriptionModel subscriptionModel = modelMapper.map(subscriptionDbo, SubscriptionModel.class);
             subscriptionModel.setPlanSubscription(planModel);
@@ -47,13 +47,12 @@ final PromotionCodeRepository promotionCodeRepository;
     }
 
     public  Boolean SubscriptionActive(Integer id){
-        List<SubscriptionModel> check=subscriptionRepository.SubscriptionsActivas(id, new Date());
+        List<SubscriptionModel> check=subscriptionRepository.SubscriptionsActivate(id, new Date());
         return check != null && !check.isEmpty();
     }
 
     public List<SubscriptionSummaryDto> listSubscriptionsByUser(Integer id) {
         List<SubscriptionModel> subscriptions = subscriptionRepository.findSubscriptionModelByUserSubscription_Id(id);
-        System.out.println(subscriptions.size());
         List<SubscriptionSummaryDto> subscriptionSummaryDtos = new ArrayList<>();
         for (SubscriptionModel subscription : subscriptions) {
             PlanModel planModel =planRepository.findById(subscription.getPlanSubscription().getId()).orElse(null);
@@ -67,13 +66,17 @@ final PromotionCodeRepository promotionCodeRepository;
                 subscriptionSummaryDto.setNamePromotionCode(promotionCodeModel.getCode());
                 subscriptionSummaryDto.setDiscountPercentage(promotionCodeModel.getDiscountPercentage());
             }
-            if (planModel!=null && methodPaymentModel!=null) {
+            if (planModel!=null ) {
                 subscriptionSummaryDto.setDateStart(subscription.getDateStart());
                 subscriptionSummaryDto.setDateEnd(subscription.getDateEnd());
                 subscriptionSummaryDto.setAmountTotal(subscription.getAmountTotal());
                 subscriptionSummaryDto.setNamePlan(planModel.getName());
-                subscriptionSummaryDto.setNumberMethodPayment(methodPaymentModel.getNumberCard());
                 subscriptionSummaryDtos.add(subscriptionSummaryDto);
+            }
+            if(methodPaymentModel!=null){
+                subscriptionSummaryDto.setNumberMethodPayment(methodPaymentModel.getNumberCard());
+            }else{
+                subscriptionSummaryDto.setNumberMethodPayment("");
             }
         }
         return subscriptionSummaryDtos;

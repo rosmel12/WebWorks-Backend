@@ -14,8 +14,9 @@ public interface SubscriptionRepository extends JpaRepository<SubscriptionModel,
     @Query(value = "select s.*\n" +
             "from subscription s\n" +
             "join user u on s.id_user=u.id\n" +
-            "where u.id=:id and s.date_end>:date", nativeQuery = true)
-    List<SubscriptionModel> SubscriptionsActivas(@Param("id") Integer id, @Param("date") Date date);
+            "where u.id=:id and s.date_end>:date\n" +
+            "and s.amount_total > 0", nativeQuery = true)
+    List<SubscriptionModel> SubscriptionsActivate(@Param("id") Integer id, @Param("date") Date date);
 
     /// Subscription by idUser
     List<SubscriptionModel> findSubscriptionModelByUserSubscription_Id(Integer id);

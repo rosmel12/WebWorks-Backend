@@ -46,11 +46,17 @@ public class PlanModel {
     @Column(name = "description8")
     private String description8;
 
-    @Column(name = "precio", nullable = false)
-    private Float precio;
+    @Column(name = "maxNumberRepository")
+    private int maxNumberRepository;
 
-    @Column(name = "imagen")
-    private String imagen;
+    @Column(name = "maxNumberProject")
+    private int maxNumberProject;
+
+    @Column(name = "price", nullable = false)
+    private Float price;
+
+    @Column(name = "image")
+    private String image;
 
     public Integer getId() {
         return id;
@@ -132,20 +138,36 @@ public class PlanModel {
         this.description8 = description8;
     }
 
-    public Float getPrecio() {
-        return precio;
+    public int getMaxNumberProject() {
+        return maxNumberProject;
     }
 
-    public void setPrecio(Float precio) {
-        this.precio = precio;
+    public void setMaxNumberProject(int maxNumberProject) {
+        this.maxNumberProject = maxNumberProject;
     }
 
-    public String getImagen() {
-        return imagen;
+    public int getMaxNumberRepository() {
+        return maxNumberRepository;
     }
 
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
+    public void setMaxNumberRepository(int maxNumberRepository) {
+        this.maxNumberRepository = maxNumberRepository;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     ///relation-subscription
