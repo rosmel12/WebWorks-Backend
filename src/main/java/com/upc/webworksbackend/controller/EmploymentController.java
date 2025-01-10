@@ -1,7 +1,7 @@
 package com.upc.webworksbackend.controller;
 
 import com.upc.webworksbackend.dto.EmploymentDto;
-import com.upc.webworksbackend.dto.EmploymentSummaryDto;
+import com.upc.webworksbackend.dtoaux.EmploymentSummaryDto;
 import com.upc.webworksbackend.serviceinterface.EmploymentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

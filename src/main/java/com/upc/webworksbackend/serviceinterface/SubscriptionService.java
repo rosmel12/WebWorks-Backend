@@ -1,7 +1,8 @@
 package com.upc.webworksbackend.serviceinterface;
 
 import com.upc.webworksbackend.dto.SubscriptionDbo;
-import com.upc.webworksbackend.dto.SubscriptionSummaryDto;
+import com.upc.webworksbackend.dtoaux.SubscriptionCheck;
+import com.upc.webworksbackend.dtoaux.SubscriptionSummaryDto;
 import com.upc.webworksbackend.model.*;
 import com.upc.webworksbackend.repository.*;
 import org.modelmapper.ModelMapper;
@@ -46,10 +47,21 @@ final PromotionCodeRepository promotionCodeRepository;
         return false;
     }
 
-    public  Boolean SubscriptionActive(Integer id){
-        List<SubscriptionModel> check=subscriptionRepository.SubscriptionsActivate( id, new Date());
 
-        return check != null && !check.isEmpty();
+    public SubscriptionCheck SubscriptionActive(Integer id){
+        List<SubscriptionModel> check=subscriptionRepository.SubscriptionsActivate( id, new Date());
+        SubscriptionCheck subscriptionCheck=new SubscriptionCheck();
+        if(!check.isEmpty()) {
+            for (SubscriptionModel subscriptionModel : check) {
+                if (subscriptionModel.getAmountTotal() == 0) {
+                    subscriptionCheck.setAmount(subscriptionModel.getAmountTotal());
+                } else {
+                    subscriptionCheck.setStatus(true);
+                    subscriptionCheck.setAmount(subscriptionModel.getAmountTotal());
+                }
+            }
+        }
+        return subscriptionCheck;
     }
 
     public List<SubscriptionSummaryDto> listSubscriptionsByUser(Integer id) {

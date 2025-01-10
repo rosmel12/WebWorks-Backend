@@ -1,9 +1,8 @@
-package com.upc.webworksbackend.dto;
+package com.upc.webworksbackend.dtoaux;
 
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Getter
 @Setter

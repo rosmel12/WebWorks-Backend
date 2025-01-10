@@ -1,7 +1,7 @@
 package com.upc.webworksbackend.serviceinterface;
 
 import com.upc.webworksbackend.dto.EmploymentDto;
-import com.upc.webworksbackend.dto.EmploymentSummaryDto;
+import com.upc.webworksbackend.dtoaux.EmploymentSummaryDto;
 import com.upc.webworksbackend.model.CompanyModel;
 import com.upc.webworksbackend.model.EmploymentModel;
 import com.upc.webworksbackend.repository.CompanyRespository;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service

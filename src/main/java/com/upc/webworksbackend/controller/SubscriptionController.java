@@ -1,6 +1,7 @@
 package com.upc.webworksbackend.controller;
 import com.upc.webworksbackend.dto.SubscriptionDbo;
-import com.upc.webworksbackend.dto.SubscriptionSummaryDto;
+import com.upc.webworksbackend.dtoaux.SubscriptionCheck;
+import com.upc.webworksbackend.dtoaux.SubscriptionSummaryDto;
 import com.upc.webworksbackend.serviceinterface.SubscriptionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class SubscriptionController {
     }
 
     @GetMapping("/user/subscriptionActive/{id}")
-    public ResponseEntity<Boolean> SubscriptionsActives(@PathVariable Integer id) {
+    public ResponseEntity<SubscriptionCheck> SubscriptionsActives(@PathVariable Integer id) {
         return new ResponseEntity<>(subscriptionService.SubscriptionActive(id), HttpStatus.OK);
     }
 

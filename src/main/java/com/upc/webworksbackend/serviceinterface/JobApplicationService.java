@@ -1,7 +1,7 @@
 package com.upc.webworksbackend.serviceinterface;
 
 import com.upc.webworksbackend.dto.JobApplicationDto;
-import com.upc.webworksbackend.dto.JobApplicationSummaryDto;
+import com.upc.webworksbackend.dtoaux.JobApplicationSummaryDto;
 import com.upc.webworksbackend.model.EmploymentModel;
 import com.upc.webworksbackend.model.JobApplicationModel;
 import com.upc.webworksbackend.model.UserModel;

@@ -1,7 +1,7 @@
 package com.upc.webworksbackend.serviceinterface;
 
 import com.upc.webworksbackend.dto.CommentProfileDto;
-import com.upc.webworksbackend.dto.CommentProfileSummaryDto;
+import com.upc.webworksbackend.dtoaux.CommentProfileSummaryDto;
 import com.upc.webworksbackend.model.CommentProfileModel;
 import com.upc.webworksbackend.model.SystemScoreModel;
 import com.upc.webworksbackend.model.UserModel;

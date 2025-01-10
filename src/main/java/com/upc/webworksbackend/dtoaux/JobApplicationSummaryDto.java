@@ -1,4 +1,4 @@
-package com.upc.webworksbackend.dto;
+package com.upc.webworksbackend.dtoaux;
 import lombok.*;
 
 import java.util.Date;

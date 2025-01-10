@@ -1,7 +1,7 @@
 package com.upc.webworksbackend.controller;
 
 import com.upc.webworksbackend.dto.CommentProfileDto;
-import com.upc.webworksbackend.dto.CommentProfileSummaryDto;
+import com.upc.webworksbackend.dtoaux.CommentProfileSummaryDto;
 import com.upc.webworksbackend.serviceinterface.CommentProfileService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
