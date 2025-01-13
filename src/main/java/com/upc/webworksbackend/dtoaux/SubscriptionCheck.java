@@ -10,4 +10,6 @@ import lombok.NoArgsConstructor;
 public class SubscriptionCheck {
     private boolean status = false;
     private float amount = -1;
+    private int maxNumberRepository;
+    private int maxNumberProject;
 }

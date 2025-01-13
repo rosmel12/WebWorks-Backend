@@ -4,15 +4,12 @@ import com.upc.webworksbackend.dto.PlanDto;
 import com.upc.webworksbackend.serviceinterface.PlanService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/webworks/planes")
+@RequestMapping("/webworks/plan")
 @CrossOrigin()
 public class PlanController {
 
@@ -22,8 +19,12 @@ public class PlanController {
         this.planService = planService;
     }
 
-    @GetMapping()
-    public ResponseEntity<List<PlanDto>> listarPlan() {
+    @GetMapping("/getPlanes")
+    public ResponseEntity<List<PlanDto>> listPlan() {
         return new ResponseEntity<>(planService.ListPlan(), HttpStatus.OK);
+    }
+    @GetMapping("/getPlanById/{idPlan}")
+    public ResponseEntity<PlanDto> getPlanById(@PathVariable Integer idPlan) {
+        return new ResponseEntity<>(planService.getPlanById(idPlan), HttpStatus.OK);
     }
 }

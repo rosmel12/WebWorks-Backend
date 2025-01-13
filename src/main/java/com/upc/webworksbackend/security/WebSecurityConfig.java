@@ -1,7 +1,6 @@
 package com.upc.webworksbackend.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,7 +16,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.servlet.HandlerExceptionResolver;
 
 @Configuration
 @EnableWebSecurity
@@ -33,9 +31,6 @@ public class WebSecurityConfig {
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
-    @Autowired
-    @Qualifier("handlerExceptionResolver")
-    private HandlerExceptionResolver exceptionResolver;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
@@ -58,7 +53,7 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/webworks/login","/webworks/registerUser","/webworks/planes","/webworks/registerCompany","/webworks/media/*").permitAll()
+                                .requestMatchers("/webworks/login","/webworks/registerUser","/webworks/plan/**","/webworks/registerCompany","/webworks/media/*").permitAll()
                                 .requestMatchers("/webworks/*/user/**").hasAuthority("USER")
                                 .requestMatchers("/webworks/*/company/**").hasAuthority("COMPANY")
                                 .anyRequest().authenticated()

@@ -30,33 +30,48 @@ final PromotionCodeRepository promotionCodeRepository;
     }
 
     public Boolean addSubscription(SubscriptionDbo subscriptionDbo) {
-        PlanModel planModel=planRepository.findById(subscriptionDbo.getId_plan()).orElse(null);
-        UserModel userModel = userRepository.findById(subscriptionDbo.getId_plan()).orElse(null);
-        MethodPaymentModel methodPaymentModel=methodPaymentRepository.findById(subscriptionDbo.getId_methodPayment()).orElse(null);
-        PromotionCodeModel promotionCodeModel=promotionCodeRepository.findById(subscriptionDbo.getId_promotionCode()).orElse(null);
-        if (planModel!=null && userModel !=null) {
-            ModelMapper modelMapper = new ModelMapper();
-            SubscriptionModel subscriptionModel = modelMapper.map(subscriptionDbo, SubscriptionModel.class);
-            subscriptionModel.setPlanSubscription(planModel);
-            subscriptionModel.setUserSubscription(userModel);
-            subscriptionModel.setMethodPaymentSubscription(methodPaymentModel);
-            subscriptionModel.setSubscriptionPromotionCode(promotionCodeModel);
-            subscriptionRepository.save(subscriptionModel);
-            return true;
-        }
-        return false;
-    }
+        // Obtención de las entidades relacionadas
+        PlanModel planModel = planRepository.findById(subscriptionDbo.getId_plan()).orElse(null);
+        UserModel userModel = userRepository.findById(subscriptionDbo.getId_user()).orElse(null);
+        MethodPaymentModel methodPaymentModel = methodPaymentRepository.findById(subscriptionDbo.getId_methodPayment()).orElse(null);
+        PromotionCodeModel promotionCodeModel = promotionCodeRepository.findById(subscriptionDbo.getId_promotionCode()).orElse(null);
 
+        // Validaciones
+        if (planModel == null || userModel == null) {
+            System.out.println("Plan o usuario no encontrados.");
+            return false;
+        }
+
+        // Mapeo y asignación de relaciones
+        ModelMapper modelMapper = new ModelMapper();
+        SubscriptionModel subscriptionModel = modelMapper.map(subscriptionDbo, SubscriptionModel.class);
+
+        subscriptionModel.setPlanSubscription(planModel);
+        subscriptionModel.setUserSubscription(userModel);
+        if (methodPaymentModel != null) {
+            subscriptionModel.setMethodPaymentSubscription(methodPaymentModel);
+        }
+        if (promotionCodeModel != null) {
+            subscriptionModel.setSubscriptionPromotionCode(promotionCodeModel);
+        }
+
+        // Guardar la suscripción
+        subscriptionRepository.save(subscriptionModel);
+        return true;
+    }
 
     public SubscriptionCheck SubscriptionActive(Integer id){
         List<SubscriptionModel> check=subscriptionRepository.SubscriptionsActivate( id, new Date());
         SubscriptionCheck subscriptionCheck=new SubscriptionCheck();
         if(!check.isEmpty()) {
             for (SubscriptionModel subscriptionModel : check) {
-                if (subscriptionModel.getAmountTotal() == 0) {
-                    subscriptionCheck.setAmount(subscriptionModel.getAmountTotal());
-                } else {
+                subscriptionCheck.setMaxNumberProject(subscriptionModel.getPlanSubscription().getMaxNumberProject());
+                subscriptionCheck.setMaxNumberRepository(subscriptionModel.getPlanSubscription().getMaxNumberRepository());
+                if (subscriptionModel.getAmountTotal() > 0.0) {
                     subscriptionCheck.setStatus(true);
+                    subscriptionCheck.setAmount(subscriptionModel.getAmountTotal());
+                    return subscriptionCheck;
+                } else {
                     subscriptionCheck.setAmount(subscriptionModel.getAmountTotal());
                 }
             }

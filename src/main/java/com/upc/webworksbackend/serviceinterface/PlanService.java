@@ -22,4 +22,10 @@ public class PlanService {
         ModelMapper modelMapper = new ModelMapper();
         return Arrays.asList(modelMapper.map(listPlan , PlanDto[].class));
     }
+
+    public PlanDto getPlanById(Integer id){
+        PlanModel planModel = planRepository.findById(id).orElse(null);
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(planModel , PlanDto.class);
+    }
 }
