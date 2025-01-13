@@ -12,4 +12,36 @@ public class SubscriptionCheck {
     private float amount = -1;
     private int maxNumberRepository;
     private int maxNumberProject;
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public float getAmount() {
+        return amount;
+    }
+
+    public void setAmount(float amount) {
+        this.amount = amount;
+    }
+
+    public int getMaxNumberRepository() {
+        return maxNumberRepository;
+    }
+
+    public void setMaxNumberRepository(int maxNumberRepository) {
+        this.maxNumberRepository = maxNumberRepository;
+    }
+
+    public int getMaxNumberProject() {
+        return maxNumberProject;
+    }
+
+    public void setMaxNumberProject(int maxNumberProject) {
+        this.maxNumberProject = maxNumberProject;
+    }
 }

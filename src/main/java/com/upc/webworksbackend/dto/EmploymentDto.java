@@ -3,7 +3,6 @@ package com.upc.webworksbackend.dto;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -26,12 +25,36 @@ public class EmploymentDto {
         this.id = id;
     }
 
+    public Integer getId_company() {
+        return id_company;
+    }
+
+    public void setId_company(Integer id_company) {
+        this.id_company = id_company;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getVacancies() {
+        return vacancies;
+    }
+
+    public void setVacancies(int vacancies) {
+        this.vacancies = vacancies;
+    }
+
+    public LocalDate getDateMaxPostulation() {
+        return dateMaxPostulation;
+    }
+
+    public void setDateMaxPostulation(LocalDate dateMaxPostulation) {
+        this.dateMaxPostulation = dateMaxPostulation;
     }
 
     public String getPosition() {
@@ -50,35 +73,11 @@ public class EmploymentDto {
         this.description = description;
     }
 
-    public int getVacancies() {
-        return vacancies;
-    }
-
-    public void setVacancies(int vacancies) {
-        this.vacancies = vacancies;
-    }
-
     public int getContracted() {
         return contracted;
     }
 
     public void setContracted(int contracted) {
         this.contracted = contracted;
-    }
-
-    public LocalDate getDateMaxPostulation() {
-        return dateMaxPostulation;
-    }
-
-    public void setDateMaxPostulation(LocalDate dateMaxPostulation) {
-        this.dateMaxPostulation = dateMaxPostulation;
-    }
-
-    public Integer getId_company() {
-        return id_company;
-    }
-
-    public void setId_company(Integer id_company) {
-        this.id_company = id_company;
     }
 }
